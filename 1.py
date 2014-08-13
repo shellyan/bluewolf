@@ -21,7 +21,7 @@ class TestFindDuplicate(unittest.TestCase):
     def setUp(self):
         pass
 
-    def testCaseOne(self):
+    def test_one(self):
         self.assertEqual(findDulpicate([1,2,3,3,4]),3)
 
 

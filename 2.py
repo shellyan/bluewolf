@@ -20,10 +20,10 @@ class TestFindCharacter(unittest.TestCase):
     def setUp(self):
         pass
 
-    def testCaseOne(self):
+    def test_one(self):
         self.assertEqual(findCharacter('DEFD'),'E')
 
-    def testCaseTwo(self):
+    def test_two(self):
         self.assertEqual(findCharacter('DEdsfnjxkgcjdsfrwerFD'),'N')
 
 

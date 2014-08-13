@@ -19,9 +19,13 @@ class TestShuffle(unittest.TestCase):
     def setUp(self):
         self.deck = [x for x in range(52)]
 
-    def testCaseOne(self):
+    def test_integrity(self):
         self.assertEqual(len(shuffle(self.deck)),52)
 
+    def test_duplicates(self):
+        shuffled_deck = shuffle(self.deck)
+        for card in shuffled_deck:
+            self.assertEqual(shuffled_deck.count(card),1)
 
 
 if __name__ == '__main__':
