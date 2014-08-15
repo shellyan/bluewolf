@@ -17,7 +17,7 @@ function should be an accompanied by a unit test.
 Please complete the following coding assessment in the language of your choice. Please provide us with both the source code and a link to the hosted solution at your earliest convenience. 
    
     1. Create a web page that takes as input A city/location name. 
-    2. This page should call the GeoNames Recent Earthquake WebService (http:// www_geonames.om/export/JSON-webservices.html#earthquakesJSON), with a bounding box dictated by the city entered. 
+    2. This page should call the GeoNames Recent Earthquake WebService (http:// www.geonames.org/export/JSON-webservices.html#earthquakesJSON), with a bounding box dictated by the city entered. 
     3. Plot the results on a Google Map (lttp://code.google.com/aoisimaps/). Each marker on this map should display details of the earthquake plotted. 
     Bonus: 
     4. Create a list of the top 10 largest earthquakes in the world for the last 12 months. 
