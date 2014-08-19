@@ -171,7 +171,7 @@ function TopControl(controlDiv, map) {
     // Set CSS for the control interior
     var controlText = document.createElement('div');
     controlText.style.fontFamily = 'Arial,sans-serif';
-    controlText.style.fontSize = '30px';
+    controlText.style.fontSize = '25px';
     controlText.style.paddingLeft = '4px';
     controlText.style.paddingRight = '4px';
     controlText.innerHTML = '<b>Top 10</b>';
@@ -182,7 +182,7 @@ function TopControl(controlDiv, map) {
     google.maps.event.addDomListener(controlUI, 'click', function() {
 
         map.setCenter(new google.maps.LatLng(0, 0));
-        map.setZoom(0);
+        map.setZoom(2);
         var geoURL = 'http://api.geonames.org/earthquakesJSON?maxRows=300&' +
             'north=180&south=-180&east=180&west=-180&username=shellyan';
         var today = new Date();
@@ -205,6 +205,7 @@ function TopControl(controlDiv, map) {
             cleanMarkers();
 
             return alert('No earthquakes found for the past 12 months.')
+
         }
             console.log("top10:"+topTen);
         });
@@ -232,5 +233,8 @@ function setAllMap(map) {
         markers[i].setMap(map);
     }
 }
+
+
+
 
 google.maps.event.addDomListener(window, 'load', initialize);
