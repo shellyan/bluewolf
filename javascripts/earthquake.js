@@ -129,7 +129,7 @@ function addMarker(earthquake){
 
     var infowindow = new google.maps.InfoWindow({
         content : contentString,
-        disableAutoPan :true
+        disableAutoPan : false
 
     });
 
