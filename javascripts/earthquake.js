@@ -141,10 +141,13 @@ function addMarker(earthquake){
 
     });
 
-    markers.push(marker);
-    google.maps.event.addListener(marker, 'click', function () {
+    google.maps.event.addListener(marker, 'mouseover', function () {
         infowindow.open(map, this);
     });
+    google.maps.event.addListener(marker, 'mouseout', function () {
+        infowindow.close();
+    });
+
 
 }
 
