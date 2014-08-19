@@ -7,5 +7,5 @@ here are some features I added in this project
 ####clean all markers
     Too many markers? No worries, they are one-click-away. 
 ####Top 10 largest earthquakes for the past 12 months.
-    Apparently there are no up-to-date data [geoName webservice](http://www.geonames.org/export/JSON-webservices.html#earthquakesJSON)
+    Apparently there are no up-to-date data from GeoName webservice.
 
