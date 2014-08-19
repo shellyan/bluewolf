@@ -6,7 +6,7 @@ function initialize() {
 
     var mapOptions = {
         center : new google.maps.LatLng(0, 0),
-        zoom : 0,
+        zoom : 2,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -141,13 +141,13 @@ function addMarker(earthquake){
 
     });
 
+    markers.push(marker);
     google.maps.event.addListener(marker, 'mouseover', function () {
         infowindow.open(map, this);
     });
     google.maps.event.addListener(marker, 'mouseout', function () {
         infowindow.close();
     });
-
 
 }
 
