@@ -118,13 +118,13 @@ function getMarkers(geoURL){
 
 function addMarker(earthquake){
     var contentString='<div id="content">' +
-        '<p> Eeathquake ID: '+ earthquake.eqid + '</p>' +
-        '<p> Magnitude: ' + earthquake.magnitude +'</p>' +
-        'Depth:'+ earthquake.depth + '</p>' +
-        '<p> Latitude: ' + earthquake.lat +'</p>' +
-        'Longitude: '+ earthquake.lng + '</p>' +
-        '<p> Time: ' + earthquake.datetime +'</p>' +
-        'Source: '+ earthquake.src + '</p>' +
+        '<li><b>Eqid</b>: '+ earthquake.eqid + '</li>' +
+        '<li> <b>Magnitude</b>: ' + earthquake.magnitude +'</li>' +
+        '<li> <b>Depth</b>:'+ earthquake.depth + '</li>' +
+        '<li> <b>Latitude</b>: ' + earthquake.lat +'</li>' +
+        '<li> <b>Longitude</b>: '+ earthquake.lng + '</li>' +
+        '<li> <b>Time</b>: ' + earthquake.datetime +'</li>' +
+        '<li> <b>Source</b>: '+ earthquake.src + '</li>' +
         '</div>';
 
     var infowindow = new google.maps.InfoWindow({
