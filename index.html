@@ -12,16 +12,17 @@
     <body>
     <div id="panel">
         <input onclick="cleanMarkers();" type=button value="Clean Markers">
+        <br>
+        <input onclick="findTopTen();" type=button value="Top Ten">
+        <br>
         <input onclick="alert(
             'This is an alert with basic formatting\n\n'
-            + 'Auto complete input. Human friendly typing helps you better find your location.\n'
-            + '▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n'
-            + 'Dynamic populated markers. Earthquakes are found after user operates done, etc, drag map, change places, zoom in/out.\n'
-            + '▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n'
-            + 'Clean all markers. Too many markers? No worries, they are one-click-away. \n\n'
-            + '▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n'
-            + 'Top 10 largest earthquakes for the past 12 months. Apparently there are no very large earthquakes.\n\n'
-            + '▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n'
+            + 'Every time you move the map will get new data from geoname based on your current bounding box.\n'
+            + 'Type any location in the search box to find nearby earthquakes. It supports auto-complete places.\n'
+            + 'Earthquake markers will not  generated while you browse the map until you click [Clean Markers].\n'
+            + 'Click [Global View] to get global view.\n'
+            + 'Click [Top 10] to get Top 10 largest earthquakes for the past 12 months.\n'
+            + 'Enjoy.'
 
 
         );" type=button value="Introduction">
