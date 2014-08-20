@@ -10,12 +10,14 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var panel = document.getElementById('panel');
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(panel);
 
 
-    var topControlDiv = document.createElement('div');
-    var topControl = new TopControl(topControlDiv, map);
-    topControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(topControlDiv);
+    var worldMapControlDiv = document.createElement('div');
+    var worldMapControl = new WorldMapControl(worldMapControlDiv, map);
+    worldMapControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(worldMapControlDiv);
 
     google.maps.event.addListener(map, 'idle',showMarkers);
 
@@ -94,9 +96,7 @@ function getMarkers(geoURL){
     $.getJSON(geoURL,function(data){
 
             if(data.earthquakes.length==0) return alert("No earthquakes found in this bounding box.")
-            var earthquake = [];
             for(var i=0;i<data.earthquakes.length;i++){
-                earthquake = earthquakesInfo[i];
                 earthquakesInfo[i] = {
                     "datetime":data.earthquakes[i].datetime,
                     "depth":data.earthquakes[i].depth,
@@ -106,12 +106,9 @@ function getMarkers(geoURL){
                     "magnitude":data.earthquakes[i].magnitude,
                     "lat":data.earthquakes[i].lat
                 }
-
-                addMarker(earthquake);
-
+                addMarker(earthquakesInfo[i]);
                 }
             }
-
     );
 
 }
@@ -129,7 +126,7 @@ function addMarker(earthquake){
 
     var infowindow = new google.maps.InfoWindow({
         content : contentString,
-        disableAutoPan : false
+        disableAutoPan : true
 
     });
 
@@ -152,7 +149,8 @@ function addMarker(earthquake){
 }
 
 //Try to use map.contol
-function TopControl(controlDiv, map) {
+/** @constructor */
+function WorldMapControl(controlDiv, map) {
     // Set CSS styles for the DIV containing the control
     // Setting padding to 5 px will offset the control
     // from the edge of the map
@@ -165,62 +163,65 @@ function TopControl(controlDiv, map) {
     controlUI.style.borderWidth = '2px';
     controlUI.style.cursor = 'pointer';
     controlUI.style.textAlign = 'center';
-    controlUI.title = 'Click to check the Top 10';
+    controlUI.title = 'Click to check the global view';
     controlDiv.appendChild(controlUI);
 
     // Set CSS for the control interior
     var controlText = document.createElement('div');
     controlText.style.fontFamily = 'Arial,sans-serif';
-    controlText.style.fontSize = '25px';
+    controlText.style.fontSize = '15px';
     controlText.style.paddingLeft = '4px';
     controlText.style.paddingRight = '4px';
-    controlText.innerHTML = '<b>Top 10</b>';
+    controlText.innerHTML = 'Global View';
     controlUI.appendChild(controlText);
 
-    cleanMarkers();
 
     google.maps.event.addDomListener(controlUI, 'click', function() {
 
         map.setCenter(new google.maps.LatLng(0, 0));
         map.setZoom(2);
-        var geoURL = 'http://api.geonames.org/earthquakesJSON?maxRows=300&' +
-            'north=180&south=-180&east=180&west=-180&username=shellyan';
-        var today = new Date();
-        var lastYear = (today.getFullYear()-1)+ '-' + (today.getMonth()+1) + '-' +today.getDate();
 
-        var topTen = [];
-        $.getJSON(geoURL,function(data){
-            var rawData = data.earthquakes;
-            rawData.forEach( function(i) {
-                if(i.datetime > lastYear) {
-                    topTen.push(i);
-                }
-            });
-        if(topTen.length>=1){
-            topTen = topTen.slice(0,10);
-            topTen.forEach(function(i){
-                addMarker(i);
-            })
-        }else{
-            cleanMarkers();
-
-            return alert('No earthquakes found for the past 12 months.')
-
-        }
-            console.log("top10:"+topTen);
-        });
     });
 
 }
 
 
 
+function findTopTen(){
+    cleanMarkers();
+    var geoURL = 'http://api.geonames.org/earthquakesJSON?maxRows=500&' +
+        'north=180&south=-180&east=180&west=-180&username=shellyan';
+
+    var today = new Date();
+    var lastYear = (today.getFullYear()-1)+ '-' + (today.getMonth()+1) + '-' +today.getDate();
+    var worldMap = [];
+    $.getJSON(geoURL,function(data){
+        var rawData = data.earthquakes;
+        rawData.forEach( function(i) {
+            if(i.datetime > lastYear) {
+                worldMap.push(i);
+            }
+        });
+        if(worldMap.length>=1){
+            worldMap = worldMap.slice(0,10);
+            worldMap.forEach(function(i){
+                addMarker(i);
+            })
+        }else{
+
+            alert('No earthquakes found for the past 12 months.')
+
+        }
+    });
+}
+
 // Shows any markers currently in the array.
 function showMarkers() {
 
     var boundingBox = map.getBounds();
     var geoURL = getGeoURL(boundingBox);
-
+//    console.log(JSON.stringify(map.getBounds()));
+    console.log(geoURL);
     getMarkers(geoURL);
 }
 
