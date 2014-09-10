@@ -61,7 +61,7 @@ function autoPlaceComplete(){
 
     });
 }
-
+//generate GET URL for geoName API with given boundingBOX, also support optional configuration
 function getGeoURL(boundingBox,optional){
     //todo
     // if boundingBox is null
@@ -89,7 +89,7 @@ function getGeoURL(boundingBox,optional){
         '&username=shellyan';
 }
 
-
+//generate earthquake markers on the map with given GET URL
 function getMarkers(geoURL){
 
     //todo check if no earthquakes
@@ -112,7 +112,8 @@ function getMarkers(geoURL){
     );
 
 }
-
+//the actual  function that renders marker with give earthquake
+//customization is hard coded
 function addMarker(earthquake){
     var contentString='<div id="content">' +
         '<li><b>Eqid</b>: '+ earthquake.eqid + '</li>' +
@@ -149,6 +150,7 @@ function addMarker(earthquake){
 }
 
 //Try to use map.contol
+//navogate to worldmap view
 /** @constructor */
 function WorldMapControl(controlDiv, map) {
     // Set CSS styles for the DIV containing the control
@@ -186,7 +188,7 @@ function WorldMapControl(controlDiv, map) {
 }
 
 
-
+//find top ten large earthquakes and render them on map
 function findTopTen(){
     cleanMarkers();
     var geoURL = 'http://api.geonames.org/earthquakesJSON?maxRows=500&' +
